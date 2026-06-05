@@ -414,8 +414,12 @@ function qid(name) { return name.replace(/[^a-zA-Z0-9]/g, '_'); }
 function render() {
   var topics = getTopics();
   var all = [];
+  var seenIds = {};
   topics.forEach(function(t) {
-    t.questions.forEach(function(q) { all.push({ id: qid(q.name), diff: q.diff }); });
+    t.questions.forEach(function(q) {
+      var id = qid(q.name);
+      if (!seenIds[id]) { seenIds[id] = true; all.push({ id: id, diff: q.diff }); }
+    });
   });
 
   var done = all.filter(function(q){ return states[q.id]==='done'; }).length;
