@@ -12,11 +12,10 @@
   --text:#e8e8f0;--muted:#8888aa;--accent:#7c6af7;--accent2:#a594ff;
   --green:#34d17a;--green-bg:#0d2a1a;--amber:#f59e3a;--amber-bg:#2a1c07;
   --red:#f06060;--red-bg:#2a1010;--blue:#60a5fa;--blue-bg:#0d1e35;
-  --font:'Sora',sans-serif;--mono:'IBM Plex Mono',monospace;--radius:10px;
+  --font:'Sora',sans-serif;--mono:'IBM Plex Mono',mxonospace;--radius:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6;}
-
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
 .logo{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:2px;}
 .sync-label{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;}
@@ -24,9 +23,7 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 .sync-dot.syncing{background:var(--amber);animation:pulse 0.8s infinite;}
 .sync-dot.error{background:var(--red);}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-
 main{max-width:900px;margin:0 auto;padding:32px 24px;}
-
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;}
 .stat-num{font-size:26px;font-weight:600;font-family:var(--mono);}
@@ -34,21 +31,17 @@ main{max-width:900px;margin:0 auto;padding:32px 24px;}
 .stat-done .stat-num{color:var(--green);}
 .stat-revisit .stat-num{color:var(--amber);}
 .stat-pct .stat-num{color:var(--accent2);}
-
 .progress-wrap{background:var(--surface2);border-radius:99px;height:4px;margin-bottom:28px;}
 .progress-fill{height:4px;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width 0.5s ease;}
-
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
 .filter-chip{font-size:12px;padding:5px 14px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:var(--font);transition:all 0.15s;}
 .filter-chip:hover{border-color:var(--border2);color:var(--text);}
 .filter-chip.active{background:var(--accent);border-color:var(--accent);color:white;}
-
 .search-wrap{position:relative;margin-bottom:24px;}
 .search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);padding:10px 16px 10px 40px;font-family:var(--font);font-size:14px;outline:none;transition:border-color 0.2s;}
 .search-wrap input:focus{border-color:var(--accent);}
 .search-wrap input::placeholder{color:var(--muted);}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;}
-
 .topic-block{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;background:var(--surface);}
 .topic-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;background:var(--surface);transition:background 0.15s;user-select:none;}
 .topic-header:hover{background:var(--surface2);}
@@ -61,18 +54,15 @@ main{max-width:900px;margin:0 auto;padding:32px 24px;}
 .topic-prog{font-size:12px;color:var(--muted);font-family:var(--mono);min-width:40px;text-align:right;}
 .chevron{color:var(--muted);font-size:14px;transition:transform 0.2s;display:inline-block;}
 .collapsed .chevron{transform:rotate(-90deg);}
-
 .q-list{display:none;border-top:1px solid var(--border);}
 .q-list.open{display:block;}
 .q-row{display:flex;align-items:center;gap:12px;padding:10px 18px;border-bottom:1px solid var(--border);transition:background 0.1s;}
 .q-row:last-child{border-bottom:none;}
 .q-row:hover{background:var(--surface2);}
-
 .q-check{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--border2);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-size:11px;color:white;}
 .q-check.done{background:var(--green);border-color:var(--green);}
 .q-check.revisit{background:var(--amber-bg);border-color:var(--amber);}
 .q-check:hover{border-color:var(--accent);}
-
 .q-num{font-size:11px;color:var(--muted);font-family:var(--mono);min-width:28px;}
 .q-name{flex:1;font-size:13px;}
 .q-name.done-text{text-decoration:line-through;color:var(--muted);}
@@ -80,34 +70,25 @@ main{max-width:900px;margin:0 auto;padding:32px 24px;}
 .diff-easy{background:var(--green-bg);color:var(--green);}
 .diff-medium{background:var(--amber-bg);color:var(--amber);}
 .diff-hard{background:var(--red-bg);color:var(--red);}
-
 .q-link{font-size:11px;color:var(--accent2);text-decoration:none;flex-shrink:0;font-family:var(--mono);padding:3px 8px;border:1px solid #3a3260;border-radius:6px;transition:background 0.15s;}
 .q-link:hover{background:#2a2240;}
 .q-rev-btn{font-size:11px;padding:3px 9px;border-radius:99px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--font);flex-shrink:0;transition:all 0.15s;}
 .q-rev-btn:hover{border-color:var(--amber);color:var(--amber);}
 .q-rev-btn.active{background:var(--amber-bg);border-color:var(--amber);color:var(--amber);}
-
 .empty{text-align:center;padding:60px;color:var(--muted);}
-
 @media(max-width:600px){
   .stats-row{grid-template-columns:repeat(2,1fr);}
-  .q-num{display:none;}
-  .q-rev-btn{display:none;}
+  .q-num,.q-rev-btn{display:none;}
   main{padding:20px 14px;}
   header{padding:0 14px;}
 }
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo">DSA // TRACKER</div>
-  <div class="sync-label">
-    <span class="sync-dot" id="sync-dot"></span>
-    <span id="sync-lbl">saved</span>
-  </div>
+  <div class="sync-label"><span class="sync-dot" id="sync-dot"></span><span id="sync-lbl">saved</span></div>
 </header>
-
 <main>
   <div class="stats-row">
     <div class="stat-card"><div class="stat-num" id="s-total">0</div><div class="stat-label">Total</div></div>
@@ -127,106 +108,13 @@ main{max-width:900px;margin:0 auto;padding:32px 24px;}
   </div>
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
-    <input type="text" id="search-input" placeholder="Search questions..." oninput="render()" />
+    <input type="text" id="search-input" placeholder="Search questions..." oninput="render()"/>
   </div>
   <div id="topics-container"></div>
 </main>
 
-<!-- Firebase compat CDN -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
 <script>
-// ============================================================
-// Paste your Firebase config here (from Firebase Console →
-// Project Settings → Your apps → Web app)
-// ============================================================
-var FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDGjLzz6LeVic6NdwbJUH6dBCfA3u3a4Jo",
-  authDomain: "dsa-tracker-23279.firebaseapp.com",
-  projectId: "dsa-tracker-23279",
-  storageBucket: "dsa-tracker-23279.firebasestorage.app",
-  messagingSenderId: "94581268090",
-  appId: "1:94581268090:web:7c7d10d373080abfe6a5c3"
-};
-// ============================================================
-
-var FIREBASE_READY = FIREBASE_CONFIG.apiKey !== "AIzaSyDGjLzz6LeVic6NdwbJUH6dBCfA3u3a4Jo";
-var DOC_ID = "my-progress"; // single document, no login needed
-var db, saveTimer;
-var states = {};
-var filter = 'all';
-
-function setSyncing(v, err) {
-  var dot = document.getElementById('sync-dot');
-  var lbl = document.getElementById('sync-lbl');
-  dot.className = 'sync-dot' + (err ? ' error' : v ? ' syncing' : '');
-  lbl.textContent = err ? 'error saving' : v ? 'saving…' : 'saved';
-}
-
-if (FIREBASE_READY) {
-  try {
-    firebase.initializeApp(FIREBASE_CONFIG);
-    db = firebase.firestore();
-    // Load saved progress
-    db.collection('progress').doc(DOC_ID).get().then(function(snap) {
-      if (snap.exists) states = snap.data().states || {};
-      render();
-    }).catch(function(e) {
-      console.error(e);
-      fallbackToLocal();
-    });
-    // Live sync — if you open on another device changes reflect instantly
-    db.collection('progress').doc(DOC_ID).onSnapshot(function(snap) {
-      if (snap.exists) { states = snap.data().states || {}; render(); }
-    });
-  } catch(e) {
-    console.error(e);
-    fallbackToLocal();
-  }
-} else {
-  fallbackToLocal();
-}
-
-function fallbackToLocal() {
-  try { var d = localStorage.getItem('dsa_states_v2'); if(d) states = JSON.parse(d); } catch(e){}
-  render();
-}
-
-function scheduleSave() {
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(doSave, 600);
-}
-
-function doSave() {
-  if (FIREBASE_READY && db) {
-    setSyncing(true);
-    db.collection('progress').doc(DOC_ID).set({ states: states }, { merge: true })
-      .then(function(){ setSyncing(false); })
-      .catch(function(){ setSyncing(false, true); });
-  } else {
-    try { localStorage.setItem('dsa_states_v2', JSON.stringify(states)); } catch(e){}
-    setSyncing(false);
-  }
-}
-
-function toggleDone(id) {
-  states[id] = (states[id] === 'done') ? 'todo' : 'done';
-  setSyncing(true); scheduleSave(); render();
-}
-
-function toggleRevisit(id) {
-  states[id] = (states[id] === 'revisit') ? 'todo' : 'revisit';
-  setSyncing(true); scheduleSave(); render();
-}
-
-function setFilter(f, el) {
-  filter = f;
-  document.querySelectorAll('.filter-chip').forEach(function(b){ b.classList.remove('active'); });
-  el.classList.add('active');
-  render();
-}
-
+// ---- DATA defined first ----
 var TOPICS = [
   { name:"Arrays & Hashing", icon:"▦", badge:"easy", questions:[
     {name:"Two Sum",diff:"easy",url:"https://leetcode.com/problems/two-sum/"},
@@ -406,49 +294,64 @@ var TOPICS = [
   ]},
 ];
 
+// ---- STATE ----
+var states = {};
+var filter = 'all';
+var saveTimer;
+var db;
+
+function setSyncing(v, err) {
+  var dot = document.getElementById('sync-dot');
+  var lbl = document.getElementById('sync-lbl');
+  dot.className = 'sync-dot' + (err ? ' error' : v ? ' syncing' : '');
+  lbl.textContent = err ? 'error' : v ? 'saving…' : 'saved';
+}
+
 function render() {
   var all = [];
-  TOPICS.forEach(function(t){ t.questions.forEach(function(q,i){ all.push({id:t.name+'_'+i,diff:q.diff}); }); });
+  TOPICS.forEach(function(t) {
+    t.questions.forEach(function(q, i) { all.push({id: t.name+'_'+i, diff: q.diff}); });
+  });
   var done = all.filter(function(q){ return states[q.id]==='done'; }).length;
   var rev  = all.filter(function(q){ return states[q.id]==='revisit'; }).length;
-  var pct  = Math.round(done/all.length*100);
+  var pct  = Math.round(done / all.length * 100);
   document.getElementById('s-total').textContent   = all.length;
   document.getElementById('s-done').textContent    = done;
   document.getElementById('s-revisit').textContent = rev;
-  document.getElementById('s-pct').textContent     = pct+'%';
-  document.getElementById('prog').style.width      = pct+'%';
+  document.getElementById('s-pct').textContent     = pct + '%';
+  document.getElementById('prog').style.width      = pct + '%';
 
-  var search = (document.getElementById('search-input')||{value:''}).value.toLowerCase();
+  var search = (document.getElementById('search-input').value || '').toLowerCase();
   var container = document.getElementById('topics-container');
   container.innerHTML = '';
   var anyVisible = false;
 
   TOPICS.forEach(function(topic) {
     var rows = [];
-    topic.questions.forEach(function(q,i){
-      var id = topic.name+'_'+i;
-      var st = states[id]||'todo';
-      if (filter==='done'    && st!=='done')    return;
-      if (filter==='revisit' && st!=='revisit') return;
-      if (filter==='todo'    && st!=='todo')    return;
-      if (filter==='easy'    && q.diff!=='easy')   return;
-      if (filter==='medium'  && q.diff!=='medium') return;
-      if (filter==='hard'    && q.diff!=='hard')   return;
-      if (search && q.name.toLowerCase().indexOf(search)===-1) return;
-      rows.push({q:q,id:id,st:st,i:i});
+    topic.questions.forEach(function(q, i) {
+      var id = topic.name + '_' + i;
+      var st = states[id] || 'todo';
+      if (filter === 'done'    && st !== 'done')    return;
+      if (filter === 'revisit' && st !== 'revisit') return;
+      if (filter === 'todo'    && st !== 'todo')    return;
+      if (filter === 'easy'    && q.diff !== 'easy')   return;
+      if (filter === 'medium'  && q.diff !== 'medium') return;
+      if (filter === 'hard'    && q.diff !== 'hard')   return;
+      if (search && q.name.toLowerCase().indexOf(search) === -1) return;
+      rows.push({q: q, id: id, st: st, i: i});
     });
     if (!rows.length) return;
     anyVisible = true;
 
-    var topicDone = topic.questions.filter(function(_,i){ return states[topic.name+'_'+i]==='done'; }).length;
-    var rowsHTML = rows.map(function(r){
+    var topicDone = topic.questions.filter(function(_, i){ return states[topic.name+'_'+i] === 'done'; }).length;
+    var rowsHTML = rows.map(function(r) {
       return '<div class="q-row">' +
-        '<div class="q-check '+r.st+'" onclick="toggleDone(\''+r.id+'\')">'+(r.st==='done'?'✓':'')+'</div>' +
-        '<span class="q-num">'+(r.i<9?'0':'')+(r.i+1)+'</span>' +
-        '<span class="q-name'+(r.st==='done'?' done-text':'')+'">'+r.q.name+'</span>' +
-        '<span class="q-diff diff-'+r.q.diff+'">'+r.q.diff+'</span>' +
-        '<a class="q-link" href="'+r.q.url+'" target="_blank" rel="noopener">LC ↗</a>' +
-        '<button class="q-rev-btn'+(r.st==='revisit'?' active':'')+'" onclick="toggleRevisit(\''+r.id+'\')">↩ revisit</button>' +
+        '<div class="q-check ' + r.st + '" onclick="toggleDone(\'' + r.id + '\')">' + (r.st==='done'?'✓':'') + '</div>' +
+        '<span class="q-num">' + (r.i < 9 ? '0' : '') + (r.i+1) + '</span>' +
+        '<span class="q-name' + (r.st==='done' ? ' done-text' : '') + '">' + r.q.name + '</span>' +
+        '<span class="q-diff diff-' + r.q.diff + '">' + r.q.diff + '</span>' +
+        '<a class="q-link" href="' + r.q.url + '" target="_blank" rel="noopener">LC ↗</a>' +
+        '<button class="q-rev-btn' + (r.st==='revisit' ? ' active' : '') + '" onclick="toggleRevisit(\'' + r.id + '\')">↩ revisit</button>' +
         '</div>';
     }).join('');
 
@@ -456,20 +359,89 @@ function render() {
     block.className = 'topic-block';
     block.innerHTML =
       '<div class="topic-header" onclick="var ql=this.nextElementSibling;ql.classList.toggle(\'open\');this.parentElement.classList.toggle(\'collapsed\');">' +
-        '<span style="color:var(--accent2);font-size:13px;">'+topic.icon+'</span>' +
-        '<span class="topic-name">'+topic.name+'</span>' +
-        '<span class="topic-badge badge-'+topic.badge+'">'+topic.badge+'</span>' +
-        '<span class="topic-prog">'+topicDone+'/'+topic.questions.length+'</span>' +
+        '<span style="color:var(--accent2);font-size:13px;">' + topic.icon + '</span>' +
+        '<span class="topic-name">' + topic.name + '</span>' +
+        '<span class="topic-badge badge-' + topic.badge + '">' + topic.badge + '</span>' +
+        '<span class="topic-prog">' + topicDone + '/' + topic.questions.length + '</span>' +
         '<span class="chevron">▾</span>' +
       '</div>' +
-      '<div class="q-list open">'+rowsHTML+'</div>';
+      '<div class="q-list open">' + rowsHTML + '</div>';
     container.appendChild(block);
   });
 
   if (!anyVisible) container.innerHTML = '<div class="empty">No questions match your filters.</div>';
 }
 
+function toggleDone(id) {
+  states[id] = (states[id] === 'done') ? 'todo' : 'done';
+  setSyncing(true); scheduleSave(); render();
+}
+
+function toggleRevisit(id) {
+  states[id] = (states[id] === 'revisit') ? 'todo' : 'revisit';
+  setSyncing(true); scheduleSave(); render();
+}
+
+function setFilter(f, el) {
+  filter = f;
+  document.querySelectorAll('.filter-chip').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  render();
+}
+
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(doSave, 600);
+}
+
+function doSave() {
+  if (db) {
+    db.collection('progress').doc('my-progress').set({states: states}, {merge: true})
+      .then(function(){ setSyncing(false); })
+      .catch(function(){ setSyncing(false, true); });
+  } else {
+    try { localStorage.setItem('dsa_states_v2', JSON.stringify(states)); } catch(e){}
+    setSyncing(false);
+  }
+}
+
+// ---- render immediately with empty states so questions show up ----
 render();
+</script>
+
+<!-- Firebase loaded AFTER initial render -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+// ============================================================
+// PASTE YOUR FIREBASE CONFIG HERE
+// ============================================================
+var FIREBASE_CONFIG = {
+apiKey: "AIzaSyDGjLzz6LeVic6NdwbJUH6dBCfA3u3a4Jo"
+authDomain: "dsa-tracker-23279.firebaseapp.com"
+projectId: "dsa-tracker-23279"
+storageBucket: "dsa-tracker-23279.firebasestorage.app"
+messagingSenderId: "94581268090"
+appId: "1:94581268090:web:7c7d10d373080abfe6a5c3"
+};
+// ============================================================
+
+if (FIREBASE_CONFIG.apiKey !== "AIzaSyDGjLzz6LeVic6NdwbJUH6dBCfA3u3a4Jo") {
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.firestore();
+    db.collection('progress').doc('my-progress').get().then(function(snap) {
+      if (snap.exists) { states = snap.data().states || {}; render(); }
+    });
+    db.collection('progress').doc('my-progress').onSnapshot(function(snap) {
+      if (snap.exists) { states = snap.data().states || {}; render(); }
+    });
+  } catch(e) {
+    try { var d = localStorage.getItem('dsa_states_v2'); if(d) states = JSON.parse(d); render(); } catch(e2){}
+  }
+} else {
+  try { var d = localStorage.getItem('dsa_states_v2'); if(d) states = JSON.parse(d); render(); } catch(e){}
+}
 </script>
 </body>
 </html>
