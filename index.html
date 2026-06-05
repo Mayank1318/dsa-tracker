@@ -7,13 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#0a0a0f;--surface:#111118;--surface2:#1a1a24;--border:#2a2a38;--border2:#3a3a50;
-  --text:#e8e8f0;--muted:#8888aa;--accent:#7c6af7;--accent2:#a594ff;
-  --green:#34d17a;--green-bg:#0d2a1a;--amber:#f59e3a;--amber-bg:#2a1c07;
-  --red:#f06060;--red-bg:#2a1010;--blue:#60a5fa;--blue-bg:#0d1e35;
-  --font:'Sora',sans-serif;--mono:'IBM Plex Mono',mxonospace;--radius:10px;
-}
+:root{--bg:#0a0a0f;--surface:#111118;--surface2:#1a1a24;--border:#2a2a38;--border2:#3a3a50;--text:#e8e8f0;--muted:#8888aa;--accent:#7c6af7;--accent2:#a594ff;--green:#34d17a;--green-bg:#0d2a1a;--amber:#f59e3a;--amber-bg:#2a1c07;--red:#f06060;--red-bg:#2a1010;--blue:#60a5fa;--blue-bg:#0d1e35;--font:'Sora',sans-serif;--mono:'IBM Plex Mono',monospace;--radius:10px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6;}
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
@@ -21,32 +15,50 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 .sync-label{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;}
 .sync-dot.syncing{background:var(--amber);animation:pulse 0.8s infinite;}
-.sync-dot.error{background:var(--red);}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-main{max-width:900px;margin:0 auto;padding:32px 24px;}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;}
-.stat-num{font-size:26px;font-weight:600;font-family:var(--mono);}
-.stat-label{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
+main{max-width:960px;margin:0 auto;padding:28px 24px;}
+
+/* Company tabs */
+.company-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+.company-tab{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:var(--font);font-size:13px;font-weight:500;transition:all 0.2s;}
+.company-tab:hover{border-color:var(--border2);color:var(--text);}
+.company-tab.active{border-color:transparent;color:white;}
+.company-tab .dot{width:8px;height:8px;border-radius:50%;}
+.tab-microsoft.active{background:#0078d4;}
+.tab-salesforce.active{background:#00a1e0;}
+.tab-all.active{background:var(--accent);}
+.tab-microsoft .dot{background:#0078d4;}
+.tab-salesforce .dot{background:#00a1e0;}
+.tab-all .dot{background:var(--accent);}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;}
+.stat-num{font-size:24px;font-weight:600;font-family:var(--mono);}
+.stat-label{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
 .stat-done .stat-num{color:var(--green);}
 .stat-revisit .stat-num{color:var(--amber);}
 .stat-pct .stat-num{color:var(--accent2);}
-.progress-wrap{background:var(--surface2);border-radius:99px;height:4px;margin-bottom:28px;}
-.progress-fill{height:4px;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width 0.5s ease;}
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.progress-wrap{background:var(--surface2);border-radius:99px;height:4px;margin-bottom:24px;}
+.progress-fill{height:4px;border-radius:99px;transition:width 0.5s ease;}
+.prog-microsoft{background:linear-gradient(90deg,#0078d4,#50c2ff);}
+.prog-salesforce{background:linear-gradient(90deg,#00a1e0,#00cba9);}
+.prog-all{background:linear-gradient(90deg,var(--accent),var(--green));}
+
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
 .filter-chip{font-size:12px;padding:5px 14px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:var(--font);transition:all 0.15s;}
 .filter-chip:hover{border-color:var(--border2);color:var(--text);}
 .filter-chip.active{background:var(--accent);border-color:var(--accent);color:white;}
-.search-wrap{position:relative;margin-bottom:24px;}
+.search-wrap{position:relative;margin-bottom:20px;}
 .search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);padding:10px 16px 10px 40px;font-family:var(--font);font-size:14px;outline:none;transition:border-color 0.2s;}
 .search-wrap input:focus{border-color:var(--accent);}
 .search-wrap input::placeholder{color:var(--muted);}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;}
-.topic-block{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;background:var(--surface);}
-.topic-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;background:var(--surface);transition:background 0.15s;user-select:none;}
+
+.topic-block{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;background:var(--surface);}
+.topic-header{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;background:var(--surface);transition:background 0.15s;user-select:none;}
 .topic-header:hover{background:var(--surface2);}
 .topic-name{font-size:14px;font-weight:500;flex:1;}
-.topic-badge{font-size:10px;padding:3px 9px;border-radius:99px;font-family:var(--mono);letter-spacing:0.5px;}
+.topic-badge{font-size:10px;padding:3px 9px;border-radius:99px;font-family:var(--mono);}
 .badge-easy{background:var(--green-bg);color:var(--green);border:1px solid #1a5c32;}
 .badge-medium{background:var(--amber-bg);color:var(--amber);border:1px solid #5c3a14;}
 .badge-hard{background:var(--red-bg);color:var(--red);border:1px solid #5c2020;}
@@ -56,31 +68,37 @@ main{max-width:900px;margin:0 auto;padding:32px 24px;}
 .collapsed .chevron{transform:rotate(-90deg);}
 .q-list{display:none;border-top:1px solid var(--border);}
 .q-list.open{display:block;}
-.q-row{display:flex;align-items:center;gap:12px;padding:10px 18px;border-bottom:1px solid var(--border);transition:background 0.1s;}
+.q-row{display:flex;align-items:center;gap:10px;padding:9px 18px;border-bottom:1px solid var(--border);transition:background 0.1s;}
 .q-row:last-child{border-bottom:none;}
 .q-row:hover{background:var(--surface2);}
-.q-check{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--border2);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-size:11px;color:white;}
+.q-check{width:19px;height:19px;border-radius:5px;border:1.5px solid var(--border2);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-size:11px;color:white;}
 .q-check.done{background:var(--green);border-color:var(--green);}
 .q-check.revisit{background:var(--amber-bg);border-color:var(--amber);}
 .q-check:hover{border-color:var(--accent);}
-.q-num{font-size:11px;color:var(--muted);font-family:var(--mono);min-width:28px;}
+.q-num{font-size:11px;color:var(--muted);font-family:var(--mono);min-width:26px;}
 .q-name{flex:1;font-size:13px;}
 .q-name.done-text{text-decoration:line-through;color:var(--muted);}
-.q-diff{font-size:10px;padding:2px 8px;border-radius:99px;flex-shrink:0;font-family:var(--mono);}
+.q-diff{font-size:10px;padding:2px 7px;border-radius:99px;flex-shrink:0;font-family:var(--mono);}
 .diff-easy{background:var(--green-bg);color:var(--green);}
 .diff-medium{background:var(--amber-bg);color:var(--amber);}
 .diff-hard{background:var(--red-bg);color:var(--red);}
-.q-link{font-size:11px;color:var(--accent2);text-decoration:none;flex-shrink:0;font-family:var(--mono);padding:3px 8px;border:1px solid #3a3260;border-radius:6px;transition:background 0.15s;}
+.q-link{font-size:11px;color:var(--accent2);text-decoration:none;flex-shrink:0;font-family:var(--mono);padding:3px 7px;border:1px solid #3a3260;border-radius:6px;transition:background 0.15s;}
 .q-link:hover{background:#2a2240;}
-.q-rev-btn{font-size:11px;padding:3px 9px;border-radius:99px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--font);flex-shrink:0;transition:all 0.15s;}
+.q-rev-btn{font-size:11px;padding:3px 8px;border-radius:99px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--font);flex-shrink:0;transition:all 0.15s;}
 .q-rev-btn:hover{border-color:var(--amber);color:var(--amber);}
 .q-rev-btn.active{background:var(--amber-bg);border-color:var(--amber);color:var(--amber);}
 .empty{text-align:center;padding:60px;color:var(--muted);}
+.company-label{font-size:10px;padding:2px 7px;border-radius:99px;flex-shrink:0;font-family:var(--mono);border:1px solid;}
+.label-microsoft{background:#001e3c;color:#60b8ff;border-color:#003a6b;}
+.label-salesforce{background:#001c2e;color:#00b8d4;border-color:#003d5c;}
+.label-both{background:#1a1228;color:#b088ff;border-color:#3a2260;}
 @media(max-width:600px){
   .stats-row{grid-template-columns:repeat(2,1fr);}
-  .q-num,.q-rev-btn{display:none;}
-  main{padding:20px 14px;}
+  .q-num,.q-rev-btn,.company-label{display:none;}
+  main{padding:16px 12px;}
   header{padding:0 14px;}
+  .company-tabs{gap:6px;}
+  .company-tab{padding:8px 14px;font-size:12px;}
 }
 </style>
 </head>
@@ -90,13 +108,18 @@ main{max-width:900px;margin:0 auto;padding:32px 24px;}
   <div class="sync-label"><span class="sync-dot" id="sync-dot"></span><span id="sync-lbl">saved</span></div>
 </header>
 <main>
+  <div class="company-tabs">
+    <button class="company-tab tab-all active" onclick="setCompany('all',this)"><span class="dot"></span>All Topics</button>
+    <button class="company-tab tab-microsoft" onclick="setCompany('microsoft',this)"><span class="dot"></span>Microsoft</button>
+    <button class="company-tab tab-salesforce" onclick="setCompany('salesforce',this)"><span class="dot"></span>Salesforce</button>
+  </div>
   <div class="stats-row">
     <div class="stat-card"><div class="stat-num" id="s-total">0</div><div class="stat-label">Total</div></div>
     <div class="stat-card stat-done"><div class="stat-num" id="s-done">0</div><div class="stat-label">Done</div></div>
     <div class="stat-card stat-revisit"><div class="stat-num" id="s-revisit">0</div><div class="stat-label">Revisit</div></div>
     <div class="stat-card stat-pct"><div class="stat-num" id="s-pct">0%</div><div class="stat-label">Progress</div></div>
   </div>
-  <div class="progress-wrap"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  <div class="progress-wrap"><div class="progress-fill prog-all" id="prog" style="width:0%"></div></div>
   <div class="filter-bar">
     <button class="filter-chip active" onclick="setFilter('all',this)">All</button>
     <button class="filter-chip" onclick="setFilter('todo',this)">To do</button>
@@ -114,189 +137,263 @@ main{max-width:900px;margin:0 auto;padding:32px 24px;}
 </main>
 
 <script>
-// ---- DATA defined first ----
-var TOPICS = [
-  { name:"Arrays & Hashing", icon:"▦", badge:"easy", questions:[
-    {name:"Two Sum",diff:"easy",url:"https://leetcode.com/problems/two-sum/"},
-    {name:"Contains Duplicate",diff:"easy",url:"https://leetcode.com/problems/contains-duplicate/"},
-    {name:"Valid Anagram",diff:"easy",url:"https://leetcode.com/problems/valid-anagram/"},
-    {name:"Group Anagrams",diff:"medium",url:"https://leetcode.com/problems/group-anagrams/"},
-    {name:"Top K Frequent Elements",diff:"medium",url:"https://leetcode.com/problems/top-k-frequent-elements/"},
-    {name:"Product of Array Except Self",diff:"medium",url:"https://leetcode.com/problems/product-of-array-except-self/"},
-    {name:"Valid Sudoku",diff:"medium",url:"https://leetcode.com/problems/valid-sudoku/"},
-    {name:"Encode and Decode Strings",diff:"medium",url:"https://leetcode.com/problems/encode-and-decode-strings/"},
-    {name:"Longest Consecutive Sequence",diff:"medium",url:"https://leetcode.com/problems/longest-consecutive-sequence/"},
-  ]},
-  { name:"Two Pointers", icon:"↔", badge:"easy", questions:[
-    {name:"Valid Palindrome",diff:"easy",url:"https://leetcode.com/problems/valid-palindrome/"},
-    {name:"Two Sum II – Sorted Array",diff:"medium",url:"https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"},
-    {name:"3Sum",diff:"medium",url:"https://leetcode.com/problems/3sum/"},
-    {name:"Container With Most Water",diff:"medium",url:"https://leetcode.com/problems/container-with-most-water/"},
-    {name:"Trapping Rain Water",diff:"hard",url:"https://leetcode.com/problems/trapping-rain-water/"},
-  ]},
-  { name:"Sliding Window", icon:"▬", badge:"medium", questions:[
-    {name:"Best Time to Buy and Sell Stock",diff:"easy",url:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"},
-    {name:"Longest Substring Without Repeating Characters",diff:"medium",url:"https://leetcode.com/problems/longest-substring-without-repeating-characters/"},
-    {name:"Longest Repeating Character Replacement",diff:"medium",url:"https://leetcode.com/problems/longest-repeating-character-replacement/"},
-    {name:"Permutation in String",diff:"medium",url:"https://leetcode.com/problems/permutation-in-string/"},
-    {name:"Minimum Window Substring",diff:"hard",url:"https://leetcode.com/problems/minimum-window-substring/"},
-    {name:"Sliding Window Maximum",diff:"hard",url:"https://leetcode.com/problems/sliding-window-maximum/"},
-  ]},
-  { name:"Stack & Monotonic Stack", icon:"⟆", badge:"medium", questions:[
-    {name:"Valid Parentheses",diff:"easy",url:"https://leetcode.com/problems/valid-parentheses/"},
-    {name:"Min Stack",diff:"medium",url:"https://leetcode.com/problems/min-stack/"},
-    {name:"Evaluate Reverse Polish Notation",diff:"medium",url:"https://leetcode.com/problems/evaluate-reverse-polish-notation/"},
-    {name:"Daily Temperatures",diff:"medium",url:"https://leetcode.com/problems/daily-temperatures/"},
-    {name:"Car Fleet",diff:"medium",url:"https://leetcode.com/problems/car-fleet/"},
-    {name:"Largest Rectangle in Histogram",diff:"hard",url:"https://leetcode.com/problems/largest-rectangle-in-histogram/"},
-  ]},
-  { name:"Binary Search", icon:"◈", badge:"medium", questions:[
-    {name:"Binary Search",diff:"easy",url:"https://leetcode.com/problems/binary-search/"},
-    {name:"Search a 2D Matrix",diff:"medium",url:"https://leetcode.com/problems/search-a-2d-matrix/"},
-    {name:"Koko Eating Bananas",diff:"medium",url:"https://leetcode.com/problems/koko-eating-bananas/"},
-    {name:"Find Minimum in Rotated Sorted Array",diff:"medium",url:"https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"},
-    {name:"Search in Rotated Sorted Array",diff:"medium",url:"https://leetcode.com/problems/search-in-rotated-sorted-array/"},
-    {name:"Time Based Key-Value Store",diff:"medium",url:"https://leetcode.com/problems/time-based-key-value-store/"},
-    {name:"Median of Two Sorted Arrays",diff:"hard",url:"https://leetcode.com/problems/median-of-two-sorted-arrays/"},
-  ]},
-  { name:"Linked List", icon:"⊶", badge:"medium", questions:[
-    {name:"Reverse Linked List",diff:"easy",url:"https://leetcode.com/problems/reverse-linked-list/"},
-    {name:"Merge Two Sorted Lists",diff:"easy",url:"https://leetcode.com/problems/merge-two-sorted-lists/"},
-    {name:"Linked List Cycle",diff:"easy",url:"https://leetcode.com/problems/linked-list-cycle/"},
-    {name:"Reorder List",diff:"medium",url:"https://leetcode.com/problems/reorder-list/"},
-    {name:"Remove Nth Node From End of List",diff:"medium",url:"https://leetcode.com/problems/remove-nth-node-from-end-of-list/"},
-    {name:"Find The Duplicate Number",diff:"medium",url:"https://leetcode.com/problems/find-the-duplicate-number/"},
-    {name:"LRU Cache",diff:"medium",url:"https://leetcode.com/problems/lru-cache/"},
-    {name:"Merge K Sorted Lists",diff:"hard",url:"https://leetcode.com/problems/merge-k-sorted-lists/"},
-    {name:"Reverse Nodes in K-Group",diff:"hard",url:"https://leetcode.com/problems/reverse-nodes-in-k-group/"},
-  ]},
-  { name:"Trees", icon:"⟁", badge:"medium", questions:[
-    {name:"Invert Binary Tree",diff:"easy",url:"https://leetcode.com/problems/invert-binary-tree/"},
-    {name:"Maximum Depth of Binary Tree",diff:"easy",url:"https://leetcode.com/problems/maximum-depth-of-binary-tree/"},
-    {name:"Diameter of Binary Tree",diff:"easy",url:"https://leetcode.com/problems/diameter-of-binary-tree/"},
-    {name:"Balanced Binary Tree",diff:"easy",url:"https://leetcode.com/problems/balanced-binary-tree/"},
-    {name:"Same Tree",diff:"easy",url:"https://leetcode.com/problems/same-tree/"},
-    {name:"Subtree of Another Tree",diff:"easy",url:"https://leetcode.com/problems/subtree-of-another-tree/"},
-    {name:"Lowest Common Ancestor of BST",diff:"medium",url:"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"},
-    {name:"Binary Tree Level Order Traversal",diff:"medium",url:"https://leetcode.com/problems/binary-tree-level-order-traversal/"},
-    {name:"Binary Tree Right Side View",diff:"medium",url:"https://leetcode.com/problems/binary-tree-right-side-view/"},
-    {name:"Count Good Nodes in Binary Tree",diff:"medium",url:"https://leetcode.com/problems/count-good-nodes-in-binary-tree/"},
-    {name:"Validate Binary Search Tree",diff:"medium",url:"https://leetcode.com/problems/validate-binary-search-tree/"},
-    {name:"Kth Smallest Element in BST",diff:"medium",url:"https://leetcode.com/problems/kth-smallest-element-in-a-bst/"},
-    {name:"Construct Binary Tree from Preorder and Inorder",diff:"medium",url:"https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/"},
-    {name:"Binary Tree Maximum Path Sum",diff:"hard",url:"https://leetcode.com/problems/binary-tree-maximum-path-sum/"},
-    {name:"Serialize and Deserialize Binary Tree",diff:"hard",url:"https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"},
-  ]},
-  { name:"Tries", icon:"⎇", badge:"medium", questions:[
-    {name:"Implement Trie (Prefix Tree)",diff:"medium",url:"https://leetcode.com/problems/implement-trie-prefix-tree/"},
-    {name:"Design Add and Search Words Data Structure",diff:"medium",url:"https://leetcode.com/problems/design-add-and-search-words-data-structure/"},
-    {name:"Word Search II",diff:"hard",url:"https://leetcode.com/problems/word-search-ii/"},
-  ]},
-  { name:"Heap / Priority Queue", icon:"△", badge:"medium", questions:[
-    {name:"Kth Largest Element in a Stream",diff:"easy",url:"https://leetcode.com/problems/kth-largest-element-in-a-stream/"},
-    {name:"Last Stone Weight",diff:"easy",url:"https://leetcode.com/problems/last-stone-weight/"},
-    {name:"K Closest Points to Origin",diff:"medium",url:"https://leetcode.com/problems/k-closest-points-to-origin/"},
-    {name:"Kth Largest Element in an Array",diff:"medium",url:"https://leetcode.com/problems/kth-largest-element-in-an-array/"},
-    {name:"Task Scheduler",diff:"medium",url:"https://leetcode.com/problems/task-scheduler/"},
-    {name:"Design Twitter",diff:"medium",url:"https://leetcode.com/problems/design-twitter/"},
-    {name:"Find Median from Data Stream",diff:"hard",url:"https://leetcode.com/problems/find-median-from-data-stream/"},
-  ]},
-  { name:"Backtracking", icon:"↺", badge:"medium", questions:[
-    {name:"Subsets",diff:"medium",url:"https://leetcode.com/problems/subsets/"},
-    {name:"Combination Sum",diff:"medium",url:"https://leetcode.com/problems/combination-sum/"},
-    {name:"Combination Sum II",diff:"medium",url:"https://leetcode.com/problems/combination-sum-ii/"},
-    {name:"Permutations",diff:"medium",url:"https://leetcode.com/problems/permutations/"},
-    {name:"Subsets II",diff:"medium",url:"https://leetcode.com/problems/subsets-ii/"},
-    {name:"Word Search",diff:"medium",url:"https://leetcode.com/problems/word-search/"},
-    {name:"Palindrome Partitioning",diff:"medium",url:"https://leetcode.com/problems/palindrome-partitioning/"},
-    {name:"Letter Combinations of a Phone Number",diff:"medium",url:"https://leetcode.com/problems/letter-combinations-of-a-phone-number/"},
-    {name:"N-Queens",diff:"hard",url:"https://leetcode.com/problems/n-queens/"},
-  ]},
-  { name:"Graphs", icon:"◎", badge:"mixed", questions:[
-    {name:"Number of Islands",diff:"medium",url:"https://leetcode.com/problems/number-of-islands/"},
-    {name:"Clone Graph",diff:"medium",url:"https://leetcode.com/problems/clone-graph/"},
-    {name:"Max Area of Island",diff:"medium",url:"https://leetcode.com/problems/max-area-of-island/"},
-    {name:"Pacific Atlantic Water Flow",diff:"medium",url:"https://leetcode.com/problems/pacific-atlantic-water-flow/"},
-    {name:"Surrounded Regions",diff:"medium",url:"https://leetcode.com/problems/surrounded-regions/"},
-    {name:"Rotting Oranges",diff:"medium",url:"https://leetcode.com/problems/rotting-oranges/"},
-    {name:"Course Schedule",diff:"medium",url:"https://leetcode.com/problems/course-schedule/"},
-    {name:"Course Schedule II",diff:"medium",url:"https://leetcode.com/problems/course-schedule-ii/"},
-    {name:"Number of Connected Components in Undirected Graph",diff:"medium",url:"https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/"},
-    {name:"Graph Valid Tree",diff:"medium",url:"https://leetcode.com/problems/graph-valid-tree/"},
-    {name:"Redundant Connection",diff:"medium",url:"https://leetcode.com/problems/redundant-connection/"},
-    {name:"Word Ladder",diff:"hard",url:"https://leetcode.com/problems/word-ladder/"},
-  ]},
-  { name:"Advanced Graphs", icon:"⊗", badge:"hard", questions:[
-    {name:"Network Delay Time",diff:"medium",url:"https://leetcode.com/problems/network-delay-time/"},
-    {name:"Cheapest Flights Within K Stops",diff:"medium",url:"https://leetcode.com/problems/cheapest-flights-within-k-stops/"},
-    {name:"Min Cost to Connect All Points",diff:"medium",url:"https://leetcode.com/problems/min-cost-to-connect-all-points/"},
-    {name:"Swim in Rising Water",diff:"hard",url:"https://leetcode.com/problems/swim-in-rising-water/"},
-    {name:"Alien Dictionary",diff:"hard",url:"https://leetcode.com/problems/alien-dictionary/"},
-    {name:"Reconstruct Itinerary",diff:"hard",url:"https://leetcode.com/problems/reconstruct-itinerary/"},
-  ]},
-  { name:"1D Dynamic Programming", icon:"∿", badge:"medium", questions:[
-    {name:"Climbing Stairs",diff:"easy",url:"https://leetcode.com/problems/climbing-stairs/"},
-    {name:"Min Cost Climbing Stairs",diff:"easy",url:"https://leetcode.com/problems/min-cost-climbing-stairs/"},
-    {name:"House Robber",diff:"medium",url:"https://leetcode.com/problems/house-robber/"},
-    {name:"House Robber II",diff:"medium",url:"https://leetcode.com/problems/house-robber-ii/"},
-    {name:"Longest Palindromic Substring",diff:"medium",url:"https://leetcode.com/problems/longest-palindromic-substring/"},
-    {name:"Palindromic Substrings",diff:"medium",url:"https://leetcode.com/problems/palindromic-substrings/"},
-    {name:"Decode Ways",diff:"medium",url:"https://leetcode.com/problems/decode-ways/"},
-    {name:"Coin Change",diff:"medium",url:"https://leetcode.com/problems/coin-change/"},
-    {name:"Maximum Product Subarray",diff:"medium",url:"https://leetcode.com/problems/maximum-product-subarray/"},
-    {name:"Word Break",diff:"medium",url:"https://leetcode.com/problems/word-break/"},
-    {name:"Longest Increasing Subsequence",diff:"medium",url:"https://leetcode.com/problems/longest-increasing-subsequence/"},
-    {name:"Jump Game",diff:"medium",url:"https://leetcode.com/problems/jump-game/"},
-    {name:"Jump Game II",diff:"medium",url:"https://leetcode.com/problems/jump-game-ii/"},
-    {name:"Partition Equal Subset Sum",diff:"medium",url:"https://leetcode.com/problems/partition-equal-subset-sum/"},
-  ]},
-  { name:"2D Dynamic Programming", icon:"⊞", badge:"hard", questions:[
-    {name:"Unique Paths",diff:"medium",url:"https://leetcode.com/problems/unique-paths/"},
-    {name:"Longest Common Subsequence",diff:"medium",url:"https://leetcode.com/problems/longest-common-subsequence/"},
-    {name:"Best Time to Buy/Sell Stock with Cooldown",diff:"medium",url:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/"},
-    {name:"Coin Change II",diff:"medium",url:"https://leetcode.com/problems/coin-change-ii/"},
-    {name:"Target Sum",diff:"medium",url:"https://leetcode.com/problems/target-sum/"},
-    {name:"Interleaving String",diff:"medium",url:"https://leetcode.com/problems/interleaving-string/"},
-    {name:"Longest Increasing Path in a Matrix",diff:"hard",url:"https://leetcode.com/problems/longest-increasing-path-in-a-matrix/"},
-    {name:"Distinct Subsequences",diff:"hard",url:"https://leetcode.com/problems/distinct-subsequences/"},
-    {name:"Edit Distance",diff:"medium",url:"https://leetcode.com/problems/edit-distance/"},
-    {name:"Burst Balloons",diff:"hard",url:"https://leetcode.com/problems/burst-balloons/"},
-    {name:"Regular Expression Matching",diff:"hard",url:"https://leetcode.com/problems/regular-expression-matching/"},
-  ]},
-  { name:"Greedy", icon:"⚡", badge:"medium", questions:[
-    {name:"Maximum Subarray",diff:"medium",url:"https://leetcode.com/problems/maximum-subarray/"},
-    {name:"Valid Parenthesis String",diff:"medium",url:"https://leetcode.com/problems/valid-parenthesis-string/"},
-    {name:"Merge Intervals",diff:"medium",url:"https://leetcode.com/problems/merge-intervals/"},
-    {name:"Insert Interval",diff:"medium",url:"https://leetcode.com/problems/insert-interval/"},
-    {name:"Non-overlapping Intervals",diff:"medium",url:"https://leetcode.com/problems/non-overlapping-intervals/"},
-    {name:"Partition Labels",diff:"medium",url:"https://leetcode.com/problems/partition-labels/"},
-    {name:"Gas Station",diff:"medium",url:"https://leetcode.com/problems/gas-station/"},
-    {name:"Hand of Straights",diff:"medium",url:"https://leetcode.com/problems/hand-of-straights/"},
-  ]},
-  { name:"Bit Manipulation", icon:"⊕", badge:"easy", questions:[
-    {name:"Number of 1 Bits",diff:"easy",url:"https://leetcode.com/problems/number-of-1-bits/"},
-    {name:"Counting Bits",diff:"easy",url:"https://leetcode.com/problems/counting-bits/"},
-    {name:"Reverse Bits",diff:"easy",url:"https://leetcode.com/problems/reverse-bits/"},
-    {name:"Missing Number",diff:"easy",url:"https://leetcode.com/problems/missing-number/"},
-    {name:"Single Number",diff:"easy",url:"https://leetcode.com/problems/single-number/"},
-    {name:"Sum of Two Integers",diff:"medium",url:"https://leetcode.com/problems/sum-of-two-integers/"},
-    {name:"Reverse Integer",diff:"medium",url:"https://leetcode.com/problems/reverse-integer/"},
-  ]},
-  { name:"Math & Geometry", icon:"◇", badge:"medium", questions:[
-    {name:"Rotate Image",diff:"medium",url:"https://leetcode.com/problems/rotate-image/"},
-    {name:"Spiral Matrix",diff:"medium",url:"https://leetcode.com/problems/spiral-matrix/"},
-    {name:"Set Matrix Zeroes",diff:"medium",url:"https://leetcode.com/problems/set-matrix-zeroes/"},
-    {name:"Happy Number",diff:"easy",url:"https://leetcode.com/problems/happy-number/"},
-    {name:"Plus One",diff:"easy",url:"https://leetcode.com/problems/plus-one/"},
-    {name:"Pow(x, n)",diff:"medium",url:"https://leetcode.com/problems/powx-n/"},
-    {name:"Multiply Strings",diff:"medium",url:"https://leetcode.com/problems/multiply-strings/"},
-    {name:"Detect Squares",diff:"medium",url:"https://leetcode.com/problems/detect-squares/"},
-  ]},
-];
+// company tags: 'microsoft', 'salesforce', 'both'
+var DATA = {
+  microsoft: [
+    { name:"Arrays & Hashing", badge:"easy", questions:[
+      {name:"Two Sum",diff:"easy",url:"https://leetcode.com/problems/two-sum/"},
+      {name:"Contains Duplicate",diff:"easy",url:"https://leetcode.com/problems/contains-duplicate/"},
+      {name:"Valid Anagram",diff:"easy",url:"https://leetcode.com/problems/valid-anagram/"},
+      {name:"Group Anagrams",diff:"medium",url:"https://leetcode.com/problems/group-anagrams/"},
+      {name:"Top K Frequent Elements",diff:"medium",url:"https://leetcode.com/problems/top-k-frequent-elements/"},
+      {name:"Product of Array Except Self",diff:"medium",url:"https://leetcode.com/problems/product-of-array-except-self/"},
+      {name:"Longest Consecutive Sequence",diff:"medium",url:"https://leetcode.com/problems/longest-consecutive-sequence/"},
+      {name:"Find All Anagrams in a String",diff:"medium",url:"https://leetcode.com/problems/find-all-anagrams-in-a-string/"},
+    ]},
+    { name:"Two Pointers", badge:"easy", questions:[
+      {name:"Valid Palindrome",diff:"easy",url:"https://leetcode.com/problems/valid-palindrome/"},
+      {name:"3Sum",diff:"medium",url:"https://leetcode.com/problems/3sum/"},
+      {name:"Container With Most Water",diff:"medium",url:"https://leetcode.com/problems/container-with-most-water/"},
+      {name:"Trapping Rain Water",diff:"hard",url:"https://leetcode.com/problems/trapping-rain-water/"},
+    ]},
+    { name:"Sliding Window", badge:"medium", questions:[
+      {name:"Best Time to Buy and Sell Stock",diff:"easy",url:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"},
+      {name:"Longest Substring Without Repeating Characters",diff:"medium",url:"https://leetcode.com/problems/longest-substring-without-repeating-characters/"},
+      {name:"Longest Repeating Character Replacement",diff:"medium",url:"https://leetcode.com/problems/longest-repeating-character-replacement/"},
+      {name:"Minimum Window Substring",diff:"hard",url:"https://leetcode.com/problems/minimum-window-substring/"},
+      {name:"Sliding Window Maximum",diff:"hard",url:"https://leetcode.com/problems/sliding-window-maximum/"},
+    ]},
+    { name:"Stack", badge:"medium", questions:[
+      {name:"Valid Parentheses",diff:"easy",url:"https://leetcode.com/problems/valid-parentheses/"},
+      {name:"Min Stack",diff:"medium",url:"https://leetcode.com/problems/min-stack/"},
+      {name:"Daily Temperatures",diff:"medium",url:"https://leetcode.com/problems/daily-temperatures/"},
+      {name:"Evaluate Reverse Polish Notation",diff:"medium",url:"https://leetcode.com/problems/evaluate-reverse-polish-notation/"},
+      {name:"Largest Rectangle in Histogram",diff:"hard",url:"https://leetcode.com/problems/largest-rectangle-in-histogram/"},
+      {name:"Basic Calculator II",diff:"medium",url:"https://leetcode.com/problems/basic-calculator-ii/"},
+    ]},
+    { name:"Binary Search", badge:"medium", questions:[
+      {name:"Binary Search",diff:"easy",url:"https://leetcode.com/problems/binary-search/"},
+      {name:"Find Minimum in Rotated Sorted Array",diff:"medium",url:"https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"},
+      {name:"Search in Rotated Sorted Array",diff:"medium",url:"https://leetcode.com/problems/search-in-rotated-sorted-array/"},
+      {name:"Time Based Key-Value Store",diff:"medium",url:"https://leetcode.com/problems/time-based-key-value-store/"},
+      {name:"Search a 2D Matrix",diff:"medium",url:"https://leetcode.com/problems/search-a-2d-matrix/"},
+      {name:"Median of Two Sorted Arrays",diff:"hard",url:"https://leetcode.com/problems/median-of-two-sorted-arrays/"},
+    ]},
+    { name:"Linked List", badge:"medium", questions:[
+      {name:"Reverse Linked List",diff:"easy",url:"https://leetcode.com/problems/reverse-linked-list/"},
+      {name:"Merge Two Sorted Lists",diff:"easy",url:"https://leetcode.com/problems/merge-two-sorted-lists/"},
+      {name:"Linked List Cycle",diff:"easy",url:"https://leetcode.com/problems/linked-list-cycle/"},
+      {name:"Reorder List",diff:"medium",url:"https://leetcode.com/problems/reorder-list/"},
+      {name:"Remove Nth Node From End of List",diff:"medium",url:"https://leetcode.com/problems/remove-nth-node-from-end-of-list/"},
+      {name:"LRU Cache",diff:"medium",url:"https://leetcode.com/problems/lru-cache/"},
+      {name:"Reverse Nodes in K-Group",diff:"hard",url:"https://leetcode.com/problems/reverse-nodes-in-k-group/"},
+      {name:"Merge K Sorted Lists",diff:"hard",url:"https://leetcode.com/problems/merge-k-sorted-lists/"},
+    ]},
+    { name:"Trees", badge:"medium", questions:[
+      {name:"Invert Binary Tree",diff:"easy",url:"https://leetcode.com/problems/invert-binary-tree/"},
+      {name:"Maximum Depth of Binary Tree",diff:"easy",url:"https://leetcode.com/problems/maximum-depth-of-binary-tree/"},
+      {name:"Diameter of Binary Tree",diff:"easy",url:"https://leetcode.com/problems/diameter-of-binary-tree/"},
+      {name:"Validate Binary Search Tree",diff:"medium",url:"https://leetcode.com/problems/validate-binary-search-tree/"},
+      {name:"Binary Tree Level Order Traversal",diff:"medium",url:"https://leetcode.com/problems/binary-tree-level-order-traversal/"},
+      {name:"Lowest Common Ancestor of BST",diff:"medium",url:"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"},
+      {name:"Kth Smallest Element in BST",diff:"medium",url:"https://leetcode.com/problems/kth-smallest-element-in-a-bst/"},
+      {name:"Construct Binary Tree from Preorder and Inorder",diff:"medium",url:"https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/"},
+      {name:"Serialize and Deserialize Binary Tree",diff:"hard",url:"https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"},
+      {name:"Binary Tree Maximum Path Sum",diff:"hard",url:"https://leetcode.com/problems/binary-tree-maximum-path-sum/"},
+    ]},
+    { name:"Tries", badge:"medium", questions:[
+      {name:"Implement Trie (Prefix Tree)",diff:"medium",url:"https://leetcode.com/problems/implement-trie-prefix-tree/"},
+      {name:"Design Add and Search Words Data Structure",diff:"medium",url:"https://leetcode.com/problems/design-add-and-search-words-data-structure/"},
+      {name:"Word Search II",diff:"hard",url:"https://leetcode.com/problems/word-search-ii/"},
+      {name:"Word Break",diff:"medium",url:"https://leetcode.com/problems/word-break/"},
+    ]},
+    { name:"Heap / Priority Queue", badge:"medium", questions:[
+      {name:"Kth Largest Element in an Array",diff:"medium",url:"https://leetcode.com/problems/kth-largest-element-in-an-array/"},
+      {name:"Top K Frequent Words",diff:"medium",url:"https://leetcode.com/problems/top-k-frequent-words/"},
+      {name:"Task Scheduler",diff:"medium",url:"https://leetcode.com/problems/task-scheduler/"},
+      {name:"Find Median from Data Stream",diff:"hard",url:"https://leetcode.com/problems/find-median-from-data-stream/"},
+      {name:"Design Twitter",diff:"medium",url:"https://leetcode.com/problems/design-twitter/"},
+    ]},
+    { name:"Graphs", badge:"mixed", questions:[
+      {name:"Number of Islands",diff:"medium",url:"https://leetcode.com/problems/number-of-islands/"},
+      {name:"Rotting Oranges",diff:"medium",url:"https://leetcode.com/problems/rotting-oranges/"},
+      {name:"Course Schedule",diff:"medium",url:"https://leetcode.com/problems/course-schedule/"},
+      {name:"Course Schedule II",diff:"medium",url:"https://leetcode.com/problems/course-schedule-ii/"},
+      {name:"Clone Graph",diff:"medium",url:"https://leetcode.com/problems/clone-graph/"},
+      {name:"Word Ladder",diff:"hard",url:"https://leetcode.com/problems/word-ladder/"},
+      {name:"Redundant Connection",diff:"medium",url:"https://leetcode.com/problems/redundant-connection/"},
+      {name:"Pacific Atlantic Water Flow",diff:"medium",url:"https://leetcode.com/problems/pacific-atlantic-water-flow/"},
+      {name:"Number of Connected Components in Undirected Graph",diff:"medium",url:"https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/"},
+    ]},
+    { name:"Dynamic Programming", badge:"hard", questions:[
+      {name:"Climbing Stairs",diff:"easy",url:"https://leetcode.com/problems/climbing-stairs/"},
+      {name:"House Robber",diff:"medium",url:"https://leetcode.com/problems/house-robber/"},
+      {name:"House Robber II",diff:"medium",url:"https://leetcode.com/problems/house-robber-ii/"},
+      {name:"Coin Change",diff:"medium",url:"https://leetcode.com/problems/coin-change/"},
+      {name:"Longest Increasing Subsequence",diff:"medium",url:"https://leetcode.com/problems/longest-increasing-subsequence/"},
+      {name:"Longest Common Subsequence",diff:"medium",url:"https://leetcode.com/problems/longest-common-subsequence/"},
+      {name:"Unique Paths",diff:"medium",url:"https://leetcode.com/problems/unique-paths/"},
+      {name:"Jump Game",diff:"medium",url:"https://leetcode.com/problems/jump-game/"},
+      {name:"Jump Game II",diff:"medium",url:"https://leetcode.com/problems/jump-game-ii/"},
+      {name:"Decode Ways",diff:"medium",url:"https://leetcode.com/problems/decode-ways/"},
+      {name:"Edit Distance",diff:"medium",url:"https://leetcode.com/problems/edit-distance/"},
+      {name:"Interleaving String",diff:"medium",url:"https://leetcode.com/problems/interleaving-string/"},
+      {name:"Maximum Product Subarray",diff:"medium",url:"https://leetcode.com/problems/maximum-product-subarray/"},
+      {name:"Regular Expression Matching",diff:"hard",url:"https://leetcode.com/problems/regular-expression-matching/"},
+      {name:"Burst Balloons",diff:"hard",url:"https://leetcode.com/problems/burst-balloons/"},
+    ]},
+    { name:"Backtracking", badge:"medium", questions:[
+      {name:"Subsets",diff:"medium",url:"https://leetcode.com/problems/subsets/"},
+      {name:"Permutations",diff:"medium",url:"https://leetcode.com/problems/permutations/"},
+      {name:"Combination Sum",diff:"medium",url:"https://leetcode.com/problems/combination-sum/"},
+      {name:"Word Search",diff:"medium",url:"https://leetcode.com/problems/word-search/"},
+      {name:"Letter Combinations of a Phone Number",diff:"medium",url:"https://leetcode.com/problems/letter-combinations-of-a-phone-number/"},
+      {name:"Palindrome Partitioning",diff:"medium",url:"https://leetcode.com/problems/palindrome-partitioning/"},
+    ]},
+    { name:"Greedy & Intervals", badge:"medium", questions:[
+      {name:"Maximum Subarray",diff:"medium",url:"https://leetcode.com/problems/maximum-subarray/"},
+      {name:"Merge Intervals",diff:"medium",url:"https://leetcode.com/problems/merge-intervals/"},
+      {name:"Insert Interval",diff:"medium",url:"https://leetcode.com/problems/insert-interval/"},
+      {name:"Non-overlapping Intervals",diff:"medium",url:"https://leetcode.com/problems/non-overlapping-intervals/"},
+      {name:"Gas Station",diff:"medium",url:"https://leetcode.com/problems/gas-station/"},
+    ]},
+    { name:"Math & Bit Manipulation", badge:"easy", questions:[
+      {name:"Reverse Integer",diff:"medium",url:"https://leetcode.com/problems/reverse-integer/"},
+      {name:"Number of 1 Bits",diff:"easy",url:"https://leetcode.com/problems/number-of-1-bits/"},
+      {name:"Single Number",diff:"easy",url:"https://leetcode.com/problems/single-number/"},
+      {name:"Missing Number",diff:"easy",url:"https://leetcode.com/problems/missing-number/"},
+      {name:"Sum of Two Integers",diff:"medium",url:"https://leetcode.com/problems/sum-of-two-integers/"},
+      {name:"Pow(x, n)",diff:"medium",url:"https://leetcode.com/problems/powx-n/"},
+      {name:"Rotate Image",diff:"medium",url:"https://leetcode.com/problems/rotate-image/"},
+      {name:"Spiral Matrix",diff:"medium",url:"https://leetcode.com/problems/spiral-matrix/"},
+      {name:"Set Matrix Zeroes",diff:"medium",url:"https://leetcode.com/problems/set-matrix-zeroes/"},
+    ]},
+  ],
 
-// ---- STATE ----
+  salesforce: [
+    { name:"Arrays & Strings", badge:"easy", questions:[
+      {name:"Two Sum",diff:"easy",url:"https://leetcode.com/problems/two-sum/"},
+      {name:"Best Time to Buy and Sell Stock",diff:"easy",url:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"},
+      {name:"Contains Duplicate",diff:"easy",url:"https://leetcode.com/problems/contains-duplicate/"},
+      {name:"Maximum Subarray",diff:"medium",url:"https://leetcode.com/problems/maximum-subarray/"},
+      {name:"Product of Array Except Self",diff:"medium",url:"https://leetcode.com/problems/product-of-array-except-self/"},
+      {name:"Rotate Image",diff:"medium",url:"https://leetcode.com/problems/rotate-image/"},
+      {name:"Spiral Matrix",diff:"medium",url:"https://leetcode.com/problems/spiral-matrix/"},
+      {name:"Set Matrix Zeroes",diff:"medium",url:"https://leetcode.com/problems/set-matrix-zeroes/"},
+      {name:"Merge Intervals",diff:"medium",url:"https://leetcode.com/problems/merge-intervals/"},
+      {name:"Insert Interval",diff:"medium",url:"https://leetcode.com/problems/insert-interval/"},
+    ]},
+    { name:"Strings & Hashing", badge:"easy", questions:[
+      {name:"Valid Anagram",diff:"easy",url:"https://leetcode.com/problems/valid-anagram/"},
+      {name:"Valid Palindrome",diff:"easy",url:"https://leetcode.com/problems/valid-palindrome/"},
+      {name:"Group Anagrams",diff:"medium",url:"https://leetcode.com/problems/group-anagrams/"},
+      {name:"Longest Substring Without Repeating Characters",diff:"medium",url:"https://leetcode.com/problems/longest-substring-without-repeating-characters/"},
+      {name:"Longest Palindromic Substring",diff:"medium",url:"https://leetcode.com/problems/longest-palindromic-substring/"},
+      {name:"Minimum Window Substring",diff:"hard",url:"https://leetcode.com/problems/minimum-window-substring/"},
+      {name:"Letter Combinations of a Phone Number",diff:"medium",url:"https://leetcode.com/problems/letter-combinations-of-a-phone-number/"},
+      {name:"ZigZag Conversion",diff:"medium",url:"https://leetcode.com/problems/zigzag-conversion/"},
+      {name:"Encode and Decode Strings",diff:"medium",url:"https://leetcode.com/problems/encode-and-decode-strings/"},
+    ]},
+    { name:"Two Pointers & Sliding Window", badge:"medium", questions:[
+      {name:"3Sum",diff:"medium",url:"https://leetcode.com/problems/3sum/"},
+      {name:"Container With Most Water",diff:"medium",url:"https://leetcode.com/problems/container-with-most-water/"},
+      {name:"Trapping Rain Water",diff:"hard",url:"https://leetcode.com/problems/trapping-rain-water/"},
+      {name:"Permutation in String",diff:"medium",url:"https://leetcode.com/problems/permutation-in-string/"},
+      {name:"Longest Repeating Character Replacement",diff:"medium",url:"https://leetcode.com/problems/longest-repeating-character-replacement/"},
+    ]},
+    { name:"Stack & Queue", badge:"medium", questions:[
+      {name:"Valid Parentheses",diff:"easy",url:"https://leetcode.com/problems/valid-parentheses/"},
+      {name:"Min Stack",diff:"medium",url:"https://leetcode.com/problems/min-stack/"},
+      {name:"Daily Temperatures",diff:"medium",url:"https://leetcode.com/problems/daily-temperatures/"},
+      {name:"Evaluate Reverse Polish Notation",diff:"medium",url:"https://leetcode.com/problems/evaluate-reverse-polish-notation/"},
+      {name:"Basic Calculator II",diff:"medium",url:"https://leetcode.com/problems/basic-calculator-ii/"},
+      {name:"Largest Rectangle in Histogram",diff:"hard",url:"https://leetcode.com/problems/largest-rectangle-in-histogram/"},
+    ]},
+    { name:"Binary Search", badge:"medium", questions:[
+      {name:"Binary Search",diff:"easy",url:"https://leetcode.com/problems/binary-search/"},
+      {name:"Search a 2D Matrix",diff:"medium",url:"https://leetcode.com/problems/search-a-2d-matrix/"},
+      {name:"Find Minimum in Rotated Sorted Array",diff:"medium",url:"https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"},
+      {name:"Search in Rotated Sorted Array",diff:"medium",url:"https://leetcode.com/problems/search-in-rotated-sorted-array/"},
+      {name:"Koko Eating Bananas",diff:"medium",url:"https://leetcode.com/problems/koko-eating-bananas/"},
+    ]},
+    { name:"Linked List", badge:"medium", questions:[
+      {name:"Reverse Linked List",diff:"easy",url:"https://leetcode.com/problems/reverse-linked-list/"},
+      {name:"Merge Two Sorted Lists",diff:"easy",url:"https://leetcode.com/problems/merge-two-sorted-lists/"},
+      {name:"Linked List Cycle",diff:"easy",url:"https://leetcode.com/problems/linked-list-cycle/"},
+      {name:"Remove Nth Node From End of List",diff:"medium",url:"https://leetcode.com/problems/remove-nth-node-from-end-of-list/"},
+      {name:"Reverse Nodes in K-Group",diff:"hard",url:"https://leetcode.com/problems/reverse-nodes-in-k-group/"},
+      {name:"Merge K Sorted Lists",diff:"hard",url:"https://leetcode.com/problems/merge-k-sorted-lists/"},
+      {name:"LRU Cache",diff:"medium",url:"https://leetcode.com/problems/lru-cache/"},
+    ]},
+    { name:"Trees", badge:"medium", questions:[
+      {name:"Maximum Depth of Binary Tree",diff:"easy",url:"https://leetcode.com/problems/maximum-depth-of-binary-tree/"},
+      {name:"Invert Binary Tree",diff:"easy",url:"https://leetcode.com/problems/invert-binary-tree/"},
+      {name:"Same Tree",diff:"easy",url:"https://leetcode.com/problems/same-tree/"},
+      {name:"Binary Tree Level Order Traversal",diff:"medium",url:"https://leetcode.com/problems/binary-tree-level-order-traversal/"},
+      {name:"Validate Binary Search Tree",diff:"medium",url:"https://leetcode.com/problems/validate-binary-search-tree/"},
+      {name:"Lowest Common Ancestor of BST",diff:"medium",url:"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"},
+      {name:"Binary Tree Right Side View",diff:"medium",url:"https://leetcode.com/problems/binary-tree-right-side-view/"},
+      {name:"Kth Smallest Element in BST",diff:"medium",url:"https://leetcode.com/problems/kth-smallest-element-in-a-bst/"},
+      {name:"Binary Tree Maximum Path Sum",diff:"hard",url:"https://leetcode.com/problems/binary-tree-maximum-path-sum/"},
+      {name:"Serialize and Deserialize Binary Tree",diff:"hard",url:"https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"},
+    ]},
+    { name:"Heap & Priority Queue", badge:"medium", questions:[
+      {name:"Kth Largest Element in an Array",diff:"medium",url:"https://leetcode.com/problems/kth-largest-element-in-an-array/"},
+      {name:"Top K Frequent Elements",diff:"medium",url:"https://leetcode.com/problems/top-k-frequent-elements/"},
+      {name:"K Closest Points to Origin",diff:"medium",url:"https://leetcode.com/problems/k-closest-points-to-origin/"},
+      {name:"Task Scheduler",diff:"medium",url:"https://leetcode.com/problems/task-scheduler/"},
+      {name:"Find Median from Data Stream",diff:"hard",url:"https://leetcode.com/problems/find-median-from-data-stream/"},
+    ]},
+    { name:"Graphs", badge:"mixed", questions:[
+      {name:"Number of Islands",diff:"medium",url:"https://leetcode.com/problems/number-of-islands/"},
+      {name:"Clone Graph",diff:"medium",url:"https://leetcode.com/problems/clone-graph/"},
+      {name:"Course Schedule",diff:"medium",url:"https://leetcode.com/problems/course-schedule/"},
+      {name:"Pacific Atlantic Water Flow",diff:"medium",url:"https://leetcode.com/problems/pacific-atlantic-water-flow/"},
+      {name:"Rotting Oranges",diff:"medium",url:"https://leetcode.com/problems/rotting-oranges/"},
+      {name:"Word Ladder",diff:"hard",url:"https://leetcode.com/problems/word-ladder/"},
+    ]},
+    { name:"Dynamic Programming", badge:"hard", questions:[
+      {name:"Climbing Stairs",diff:"easy",url:"https://leetcode.com/problems/climbing-stairs/"},
+      {name:"House Robber",diff:"medium",url:"https://leetcode.com/problems/house-robber/"},
+      {name:"Coin Change",diff:"medium",url:"https://leetcode.com/problems/coin-change/"},
+      {name:"Longest Common Subsequence",diff:"medium",url:"https://leetcode.com/problems/longest-common-subsequence/"},
+      {name:"Longest Increasing Subsequence",diff:"medium",url:"https://leetcode.com/problems/longest-increasing-subsequence/"},
+      {name:"Word Break",diff:"medium",url:"https://leetcode.com/problems/word-break/"},
+      {name:"Unique Paths",diff:"medium",url:"https://leetcode.com/problems/unique-paths/"},
+      {name:"Jump Game",diff:"medium",url:"https://leetcode.com/problems/jump-game/"},
+      {name:"Decode Ways",diff:"medium",url:"https://leetcode.com/problems/decode-ways/"},
+      {name:"Partition Equal Subset Sum",diff:"medium",url:"https://leetcode.com/problems/partition-equal-subset-sum/"},
+    ]},
+    { name:"Backtracking", badge:"medium", questions:[
+      {name:"Subsets",diff:"medium",url:"https://leetcode.com/problems/subsets/"},
+      {name:"Permutations",diff:"medium",url:"https://leetcode.com/problems/permutations/"},
+      {name:"Combination Sum",diff:"medium",url:"https://leetcode.com/problems/combination-sum/"},
+      {name:"Word Search",diff:"medium",url:"https://leetcode.com/problems/word-search/"},
+      {name:"N-Queens",diff:"hard",url:"https://leetcode.com/problems/n-queens/"},
+    ]},
+  ],
+};
+
+// Build "all" by merging and deduplicating by topic name
+function buildAll() {
+  var topicMap = {};
+  ['microsoft','salesforce'].forEach(function(co) {
+    DATA[co].forEach(function(topic) {
+      var key = topic.name;
+      if (!topicMap[key]) topicMap[key] = { name: topic.name, badge: topic.badge, qMap: {} };
+      topic.questions.forEach(function(q) {
+        topicMap[key].qMap[q.name] = q;
+      });
+    });
+  });
+  return Object.values(topicMap).map(function(t) {
+    return { name: t.name, badge: t.badge, questions: Object.values(t.qMap) };
+  });
+}
+
 var states = {};
 var filter = 'all';
+var company = 'all';
 var saveTimer;
 var db;
 
@@ -307,51 +404,62 @@ function setSyncing(v, err) {
   lbl.textContent = err ? 'error' : v ? 'saving…' : 'saved';
 }
 
+function getTopics() {
+  if (company === 'all') return buildAll();
+  return DATA[company] || [];
+}
+
+function qid(name) { return name.replace(/[^a-zA-Z0-9]/g, '_'); }
+
 function render() {
+  var topics = getTopics();
   var all = [];
-  TOPICS.forEach(function(t) {
-    t.questions.forEach(function(q, i) { all.push({id: t.name+'_'+i, diff: q.diff}); });
+  topics.forEach(function(t) {
+    t.questions.forEach(function(q) { all.push({ id: qid(q.name), diff: q.diff }); });
   });
+
   var done = all.filter(function(q){ return states[q.id]==='done'; }).length;
   var rev  = all.filter(function(q){ return states[q.id]==='revisit'; }).length;
-  var pct  = Math.round(done / all.length * 100);
+  var pct  = all.length ? Math.round(done/all.length*100) : 0;
   document.getElementById('s-total').textContent   = all.length;
   document.getElementById('s-done').textContent    = done;
   document.getElementById('s-revisit').textContent = rev;
-  document.getElementById('s-pct').textContent     = pct + '%';
-  document.getElementById('prog').style.width      = pct + '%';
+  document.getElementById('s-pct').textContent     = pct+'%';
+  var prog = document.getElementById('prog');
+  prog.style.width = pct+'%';
+  prog.className = 'progress-fill prog-'+company;
 
-  var search = (document.getElementById('search-input').value || '').toLowerCase();
+  var search = (document.getElementById('search-input').value||'').toLowerCase();
   var container = document.getElementById('topics-container');
   container.innerHTML = '';
   var anyVisible = false;
 
-  TOPICS.forEach(function(topic) {
+  topics.forEach(function(topic) {
     var rows = [];
     topic.questions.forEach(function(q, i) {
-      var id = topic.name + '_' + i;
-      var st = states[id] || 'todo';
-      if (filter === 'done'    && st !== 'done')    return;
-      if (filter === 'revisit' && st !== 'revisit') return;
-      if (filter === 'todo'    && st !== 'todo')    return;
-      if (filter === 'easy'    && q.diff !== 'easy')   return;
-      if (filter === 'medium'  && q.diff !== 'medium') return;
-      if (filter === 'hard'    && q.diff !== 'hard')   return;
-      if (search && q.name.toLowerCase().indexOf(search) === -1) return;
-      rows.push({q: q, id: id, st: st, i: i});
+      var id = qid(q.name);
+      var st = states[id]||'todo';
+      if (filter==='done' && st!=='done') return;
+      if (filter==='revisit' && st!=='revisit') return;
+      if (filter==='todo' && st!=='todo') return;
+      if (filter==='easy' && q.diff!=='easy') return;
+      if (filter==='medium' && q.diff!=='medium') return;
+      if (filter==='hard' && q.diff!=='hard') return;
+      if (search && q.name.toLowerCase().indexOf(search)===-1) return;
+      rows.push({q:q,id:id,st:st,i:i});
     });
     if (!rows.length) return;
     anyVisible = true;
 
-    var topicDone = topic.questions.filter(function(_, i){ return states[topic.name+'_'+i] === 'done'; }).length;
+    var topicDone = topic.questions.filter(function(q){ return states[qid(q.name)]==='done'; }).length;
     var rowsHTML = rows.map(function(r) {
       return '<div class="q-row">' +
-        '<div class="q-check ' + r.st + '" onclick="toggleDone(\'' + r.id + '\')">' + (r.st==='done'?'✓':'') + '</div>' +
-        '<span class="q-num">' + (r.i < 9 ? '0' : '') + (r.i+1) + '</span>' +
-        '<span class="q-name' + (r.st==='done' ? ' done-text' : '') + '">' + r.q.name + '</span>' +
-        '<span class="q-diff diff-' + r.q.diff + '">' + r.q.diff + '</span>' +
-        '<a class="q-link" href="' + r.q.url + '" target="_blank" rel="noopener">LC ↗</a>' +
-        '<button class="q-rev-btn' + (r.st==='revisit' ? ' active' : '') + '" onclick="toggleRevisit(\'' + r.id + '\')">↩ revisit</button>' +
+        '<div class="q-check '+r.st+'" onclick="toggleDone(\''+r.id+'\')">'+(r.st==='done'?'✓':'')+'</div>' +
+        '<span class="q-num">'+(r.i<9?'0':'')+(r.i+1)+'</span>' +
+        '<span class="q-name'+(r.st==='done'?' done-text':'')+'" >'+r.q.name+'</span>' +
+        '<span class="q-diff diff-'+r.q.diff+'">'+r.q.diff+'</span>' +
+        '<a class="q-link" href="'+r.q.url+'" target="_blank" rel="noopener">LC ↗</a>' +
+        '<button class="q-rev-btn'+(r.st==='revisit'?' active':'')+'" onclick="toggleRevisit(\''+r.id+'\')">↩ revisit</button>' +
         '</div>';
     }).join('');
 
@@ -359,13 +467,12 @@ function render() {
     block.className = 'topic-block';
     block.innerHTML =
       '<div class="topic-header" onclick="var ql=this.nextElementSibling;ql.classList.toggle(\'open\');this.parentElement.classList.toggle(\'collapsed\');">' +
-        '<span style="color:var(--accent2);font-size:13px;">' + topic.icon + '</span>' +
-        '<span class="topic-name">' + topic.name + '</span>' +
-        '<span class="topic-badge badge-' + topic.badge + '">' + topic.badge + '</span>' +
-        '<span class="topic-prog">' + topicDone + '/' + topic.questions.length + '</span>' +
+        '<span class="topic-name">'+topic.name+'</span>' +
+        '<span class="topic-badge badge-'+topic.badge+'">'+topic.badge+'</span>' +
+        '<span class="topic-prog">'+topicDone+'/'+topic.questions.length+'</span>' +
         '<span class="chevron">▾</span>' +
       '</div>' +
-      '<div class="q-list open">' + rowsHTML + '</div>';
+      '<div class="q-list open">'+rowsHTML+'</div>';
     container.appendChild(block);
   });
 
@@ -373,43 +480,41 @@ function render() {
 }
 
 function toggleDone(id) {
-  states[id] = (states[id] === 'done') ? 'todo' : 'done';
+  states[id] = (states[id]==='done') ? 'todo' : 'done';
   setSyncing(true); scheduleSave(); render();
 }
-
 function toggleRevisit(id) {
-  states[id] = (states[id] === 'revisit') ? 'todo' : 'revisit';
+  states[id] = (states[id]==='revisit') ? 'todo' : 'revisit';
   setSyncing(true); scheduleSave(); render();
 }
-
 function setFilter(f, el) {
   filter = f;
   document.querySelectorAll('.filter-chip').forEach(function(b){ b.classList.remove('active'); });
-  el.classList.add('active');
-  render();
+  el.classList.add('active'); render();
 }
-
+function setCompany(c, el) {
+  company = c;
+  document.querySelectorAll('.company-tab').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active'); render();
+}
 function scheduleSave() {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(doSave, 600);
 }
-
 function doSave() {
   if (db) {
-    db.collection('progress').doc('my-progress').set({states: states}, {merge: true})
+    db.collection('progress').doc('my-progress').set({states:states},{merge:true})
       .then(function(){ setSyncing(false); })
-      .catch(function(){ setSyncing(false, true); });
+      .catch(function(){ setSyncing(false,true); });
   } else {
-    try { localStorage.setItem('dsa_states_v2', JSON.stringify(states)); } catch(e){}
+    try { localStorage.setItem('dsa_states_v3', JSON.stringify(states)); } catch(e){}
     setSyncing(false);
   }
 }
 
-// ---- render immediately with empty states so questions show up ----
 render();
 </script>
 
-<!-- Firebase loaded AFTER initial render -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
@@ -417,30 +522,25 @@ render();
 // PASTE YOUR FIREBASE CONFIG HERE
 // ============================================================
 var FIREBASE_CONFIG = {
-apiKey: "AIzaSyDGjLzz6LeVic6NdwbJUH6dBCfA3u3a4Jo"
-authDomain: "dsa-tracker-23279.firebaseapp.com"
-projectId: "dsa-tracker-23279"
-storageBucket: "dsa-tracker-23279.firebasestorage.app"
-messagingSenderId: "94581268090"
-appId: "1:94581268090:web:7c7d10d373080abfe6a5c3"
+  apiKey: "AIzaSyDGjLzz6LeVic6NdwbJUH6dBCfA3u3a4Jo",
+  authDomain: "dsa-tracker-23279.firebaseapp.com",
+  projectId: "dsa-tracker-23279",
+  storageBucket: "dsa-tracker-23279.firebasestorage.app",
+  messagingSenderId: "94581268090",
+  appId: "1:94581268090:web:7c7d10d373080abfe6a5c3"
 };
 // ============================================================
-
-if (FIREBASE_CONFIG.apiKey !== "AIzaSyDGjLzz6LeVic6NdwbJUH6dBCfA3u3a4Jo") {
-  try {
-    firebase.initializeApp(FIREBASE_CONFIG);
-    db = firebase.firestore();
-    db.collection('progress').doc('my-progress').get().then(function(snap) {
-      if (snap.exists) { states = snap.data().states || {}; render(); }
-    });
-    db.collection('progress').doc('my-progress').onSnapshot(function(snap) {
-      if (snap.exists) { states = snap.data().states || {}; render(); }
-    });
-  } catch(e) {
-    try { var d = localStorage.getItem('dsa_states_v2'); if(d) states = JSON.parse(d); render(); } catch(e2){}
-  }
-} else {
-  try { var d = localStorage.getItem('dsa_states_v2'); if(d) states = JSON.parse(d); render(); } catch(e){}
+try {
+  firebase.initializeApp(FIREBASE_CONFIG);
+  db = firebase.firestore();
+  db.collection('progress').doc('my-progress').get().then(function(snap) {
+    if (snap.exists) { states = snap.data().states || {}; render(); }
+  });
+  db.collection('progress').doc('my-progress').onSnapshot(function(snap) {
+    if (snap.exists) { states = snap.data().states || {}; render(); }
+  });
+} catch(e) {
+  try { var d = localStorage.getItem('dsa_states_v3'); if(d) states = JSON.parse(d); render(); } catch(e2){}
 }
 </script>
 </body>
